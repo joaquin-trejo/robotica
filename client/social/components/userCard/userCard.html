@@ -1,0 +1,74 @@
+<rd-card data-rd-section="{{$ctrl.resource.type}}">
+    <rd-card-toolbar ng-if="$ctrl.editable">
+        <div layout="row">
+            <div class="rd-card__status" flex ng-hide="$ctrl.resource.published == undefined"> <i class="fa fa-check-circle-o"></i>	Publicado</div>
+            <div class="rd-card__status" flex ng-show="$ctrl.resource.published == undefined"> <i class="fa fa-save"></i> Guardado</div>
+            <md-button ng-click="$ctrl.deleteUserBoolean = !$ctrl.deleteUserBoolean;" class="bordered md-raised md-mini rd-card__button--delete" aria-label="Eliminar Usuario">
+                <md-icon md-font-icon="">delete</md-icon>
+            </md-button>=
+        </div>
+    </rd-card-toolbar>
+
+    <rd-card-body>
+        <div layout="row" ng-hide="$ctrl.deleteUserBoolean">
+            <div class="rd-card__thumbnail">
+                <img ng-src="{{$ctrl.user.google.image.url}}" alt="Miniatura" >
+            </div>
+            <div flex class="rd-card__body--custom">
+                <h1 class="rd-card__title--v1">{{$ctrl.user.name}}</h1>
+                <p class="rd-card__paragraph" ng-show="$ctrl.showInfo"><strong>Role: </strong>{{$ctrl.user.role | truncate:140 }}</p>
+                <p class="rd-card__paragraph" ng-hide="$ctrl.showInfo"><strong>Role: </strong>
+                    <md-autocomplete
+                            md-selected-item="$ctrl.selectedRole"
+                            md-search-text="$ctrl.searchText"
+                            md-items="role in $ctrl.roles"
+                            md-item-text="role.name"
+                            md-min-length="0"
+                            placeholder="Seleccione el Rol del Usuario">
+                        <md-item-template>
+                            <span md-highlight-text="$ctrl.searchText" md-highlight-flags="^i">{{role.name}}</span>
+                        </md-item-template>
+                        <md-not-found>
+                            No states matching "{{$ctrl.searchText}}" were found.
+                        </md-not-found>
+                    </md-autocomplete>
+                </p>
+                <!--<p><strong class="rd-card__updated rd__color&#45;&#45;grey-light ">Actualizado <strong am-time-ago="$ctrl.resource.createdAt"></strong> </strong></p>-->
+                <!--<p><strong class="rd-card__owner">{{$ctrl.resource.owner.name}}</strong></p>-->
+            </div>
+        </div>
+        <div layout="row" ng-show="$ctrl.deleteUserBoolean">
+            <div class="dashboard__remove" ng-hide="$ctrl.loading">
+                <p class="dashboard__remove--legend">¿Esta seguro que desea eliminar PERMANENTEMENTE el Usuario?</p>
+                <md-button ng-click="$ctrl.deleteUser($ctrl.user._id)" class="md-raised md-primary dashboard__remove--button" aria-label="Eliminar módulo">
+                    Confirmar y Eliminar Usuario
+                </md-button>
+                <md-button ng-click="$ctrl.deleteUserBoolean = !$ctrl.deleteUserBoolean" class="md-raised md-primary dashboard__remove--button" aria-label="Eliminar módulo">
+                    Cancelar
+                </md-button>
+            </div>
+        </div>
+        <div align="center" ng-show="$ctrl.showInfo">
+            <md-button class="bordered mini-button md-button md-ink-ripple rd-card__button--edit"
+                       ng-click="$ctrl.showInfo = !$ctrl.showInfo">
+                <div layout="row">
+                    <md-icon class="mi-mode-edit"></md-icon><span>Editar Role</span>
+                </div>
+            </md-button>
+        </div>
+        <div align="center" ng-hide="$ctrl.showInfo">
+            <md-button class="bordered mini-button md-button md-ink-ripple rd-card__button--edit"
+                       ng-click="$ctrl.updateUser($ctrl.user._id)">
+                <div layout="row">
+                    <md-icon class="mi-mode-edit"></md-icon><span>Guardar</span>
+                </div>
+            </md-button>
+            <md-button class="bordered mini-button md-button md-ink-ripple rd-card__button--edit"
+                       ng-click="$ctrl.getUserRole($ctrl.user); $ctrl.showInfo = !$ctrl.showInfo">
+                <div layout="row">
+                    <span>Cancelar</span>
+                </div>
+            </md-button>
+        </div>
+    </rd-card-body>
+</rd-card>

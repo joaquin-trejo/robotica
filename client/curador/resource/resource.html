@@ -6,7 +6,7 @@
 <!-- delete -->
 <div ng-if="$ctrl.isDelete">
 	<div class="dashboard__remove" ng-hide="$ctrl.loading">
-		<p class="dashboard__remove--legend">¿Esta seguro que desea eliminar PERMANENTEMENTE el Recurso?</p>
+		<p class="dashboard__remove--legend">¿Esta seguro que desea eliminar PERMANENTEMENTE este {{$ctrl.getResourceType($ctrl.resource.type)}}?</p>
 		<md-button ng-click="$ctrl.deleteResource()" class="md-raised md-primary dashboard__remove--button" aria-label="Eliminar módulo">
 			Confirmar y Eliminar Recurso
 		</md-button>
@@ -14,7 +14,7 @@
 </div>
 
 <!-- toolbar -->
-<div class="dashboard__toolbar" ng-hide="$ctrl.loading">
+<div class="dashboard__toolbar" ng-hide="($ctrl.loading || $ctrl.isDelete)">
 	<rd-stepper class="dashboard__stepper" 
 							rd-section="{{$ctrl.resource.type}}" 
 							steps="$ctrl.steps"
@@ -27,7 +27,7 @@
 </div>
 
 <!-- STEP FICHA -->
-<div class="dashboard__wrapper" ng-if="$ctrl.currentStep == 'ficha'" ng-hide="$ctrl.loading">
+<div class="dashboard__wrapper" ng-if="$ctrl.currentStep == 'ficha'" ng-hide="($ctrl.loading || $ctrl.isDelete)">
 	<div class="dashboard__container"  layout="row" layout-align="start stretch">
 		<md-content class="dashboard__sidenav" data-type="{{$ctrl.resource.type}}">
 			<h2 class="dashboard__sidenav--head">{{$ctrl.headText}}</h2>
@@ -40,7 +40,7 @@
 				<md-select ng-model="$ctrl.resource.category" placeholder="Seleccioná un tipo" required>
 					<md-option ng-value="orientacion" ng-repeat="orientacion in $ctrl.orientaciones">{{ orientacion }}</md-option>
 				</md-select>
-			</md-input-container>
+			</md-input-container>		
 			<md-content class="thumbnail__container">
 				<div class="dropzone dz__custom dz__thumbnail select-thumbnail dz-tumbnail-clickable" options="$ctrl.dzOptions" callbacks="$ctrl.dzCallbacks" methods="$ctrl.dzMethods" ng-dropzone
 						 ng-hide="$ctrl.resource.thumbnail !== ''"></div>
@@ -53,7 +53,7 @@
 					</md-button>
 				</div>
 			</md-content>
-			<md-content ng-if="$ctrl.resource.type !== 'mediateca'">
+			<md-content ng-if="$ctrl.resource.type !== 'mediateca' && $ctrl.resource.type !== 'desafio'">
 				<md-expansion-panel class="option-panel">
 					
 					 <md-expansion-panel-collapsed>
@@ -83,7 +83,7 @@
 					
 				 </md-expansion-panel>
 			</md-content>
-			<md-content ng-if="$ctrl.resource.type !== 'mediateca'">
+			<md-content ng-if="$ctrl.resource.type !== 'mediateca' && $ctrl.resource.type !== 'desafio'">
 				<md-expansion-panel class="option-panel">
 					
 					 <md-expansion-panel-collapsed>
@@ -113,6 +113,44 @@
 					
 				 </md-expansion-panel>
 			</md-content>
+
+			<!-- DESAFIOS -->
+			<!-- TODO: Cargar niveles de los desafios -->
+			<!-- TODO: Cargar colegios de los desafios -->
+			<!-- TODO: Cargar distritos de los desafios -->
+			<md-content ng-if="$ctrl.resource.type == 'desafio'">
+				<md-expansion-panel class="option-panel">
+					
+					 <md-expansion-panel-collapsed>
+						 <div class="md-title">Nivel *</div>
+						 <div class="md-summary">{{$ctrl.resource.area.length}} {{$ctrl.textSelection($ctrl.resource.area.length)}}</div>
+						 <md-expansion-panel-icon></md-expansion-panel-icon>
+					 </md-expansion-panel-collapsed>
+					
+					
+					 <md-expansion-panel-expanded>
+					
+						 <md-expansion-panel-header ng-click="$panel.collapse()">
+							 <div class="md-title">Nivel *</div>
+							 <div class="md-summary"></div>
+							 <md-expansion-panel-icon></md-expansion-panel-icon>
+						 </md-expansion-panel-header>
+					
+						 <md-expansion-panel-content>
+								<div flex="100" ng-repeat="item in $ctrl.areas">
+										<md-checkbox ng-checked="$ctrl.exists(item, $ctrl.resource.area)" ng-click="$ctrl.toggle(item, $ctrl.resource.area)">
+										{{ item }}
+									</md-checkbox>
+								</div>
+						 </md-expansion-panel-content>
+					
+					 </md-expansion-panel-expanded>
+					
+				 </md-expansion-panel>
+			</md-content>
+
+
+
 		</md-content>
 		
 		<md-content  class="dashboard__content" flex>

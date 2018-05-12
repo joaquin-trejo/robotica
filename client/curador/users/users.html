@@ -1,0 +1,20 @@
+<div class="banner__dashboard--home" layout="row" layout-align="center center">
+    <div class="banner__avatar">
+        <div class="banner__avatar--wrapper" ng-show="$ctrl.user.google.image !== undefined">
+            <img ng-src="{{$ctrl.user.google.image.url}}" alt="Avatar">
+        </div>
+    </div>
+    <div class="banner__content">
+        <div><h1 class="banner__head">Hola {{$ctrl.username}}!</h1></div>
+        <div class="banner__subhead">estas en el modulo de Usuarios Robotica</div>
+        <div class="banner__legend"><p>acá podés <span class="font-medium">ver, crear y editar</span> Usuarios</p></div>
+    </div>
+</div>
+
+<section class="resources_waterfall">
+    <rd-waterfall item-width="350" gutter="24" load-more-text="Ver más usuarios" fetch="$ctrl.fetchData()" item-click="$ctrl.viewResource" search-text="$ctrl.searchText">
+        <rd-item-template>
+            <user-card user="item" editable="item.type !== 'addnew'"></user-card>
+        </rd-item-template>
+    </rd-waterfall>
+</section>

@@ -44,4 +44,6 @@ server/auth/available-emails.json
 
 # uploads
 uploads/*
-!uploads/.gitkeep 
+!uploads/.gitkeep
+
+.idea/

@@ -11,7 +11,7 @@ import _ from 'lodash';
   return process.env[name];
 }*/
 
-let secret = require('../secret');
+let secret = require('../secret.example');
 let rootPath = path.normalize(`${__dirname}/../../..`);
 
 

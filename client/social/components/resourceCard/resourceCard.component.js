@@ -11,7 +11,7 @@ class ResourceCardController {
 		this.$scope = $scope;
 		this.$element = $element;
 		this.$state = $state;
-    this.$element.addClass('resource-card');
+    	this.$element.addClass('resource-card');
     
 		this.resource = this.$scope.resource;
 		this.editable = this.$scope.editable === true;
@@ -21,6 +21,7 @@ class ResourceCardController {
 			'herramienta': 'Herramienta',
 			'orientacion': 'Orientación',
 			'mediateca': 'Mediateca',
+			'desafio': 'Desafío',
 		};
 
 		this.resource.typeCaption = captions[this.resource.type];

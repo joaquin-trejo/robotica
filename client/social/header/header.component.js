@@ -20,8 +20,53 @@ class HeaderComponent {
       { section: 'herramientas', icon: 'ri ri-herramienta', caption: 'Herramientas' },
       { section: 'orientaciones', icon: 'ri ri-orientaciones', caption: 'Orientaciones' },
       { section: 'mediateca', icon: 'ri ri-mediateca', caption: 'Mediateca' },
+      { section: 'mediateca1', icon: 'ri ri-mediateca', caption: 'Mediateca1' },
     ];
 
+    this.menuNavBar = [
+      {
+        section: 'institucional',  caption: 'Institucional',
+        "nodes": [
+          {
+            section: 'quienesSomos',  caption: 'Quienes Somos', action:'/quienesSomos.html'
+          },
+          {
+            section: 'ultimasNoticias',  caption: 'Ultimas Noticas', action:'?seccion=ultimasNoticias'
+          },
+          {
+            section: 'calendario',  caption: 'Calendario', action:'?seccion=calendario'
+          }
+        ]
+      },
+      {
+        section: 'desafios',  caption: 'Desafios',
+        "nodes": [
+          {
+            section: 'desafios',  caption: 'Desafios', action:'?seccion=desafios'
+          },
+          {
+            section: 'subiDesafio',  caption: 'Subi tu desafio', action:'/subiDesafio'
+          }
+        ]
+      },
+      {
+        section: 'Otra',  caption: 'Otra de purbea',
+        "nodes": [
+          {
+            section: 'prueba 1',  caption: 'prueba1 ', action:'?seccion=desafios'
+          },
+          {
+            section: 'prueba 2',  caption: 'prueba2 ', action:'/subiDesafio'
+          }
+        ]
+      },
+      {
+        section: 'kits',  caption: 'Kits', action:'?seccion=kits'
+      }
+    ];
+
+    this.arraySectionsName = [];
+  
     $rootScope.$on('$stateChangeSuccess', (event, toState, toParams, fromState, fromParams) => {
       this.searchText =  $stateParams.search || '';
       if (!toParams.seccion){
@@ -32,6 +77,9 @@ class HeaderComponent {
 
   $onInit(){
     this.selected = this.$stateParams.seccion;
+    for (var j = 0; j < this.menuNavBar.length; j++) {
+      this.arraySectionsName.push(this.menuNavBar[j].section);
+    }
   }
   
   selectedItemChange(item){
@@ -47,11 +95,13 @@ class HeaderComponent {
   }
 
   itemClicked(item) {
-    if (this.selected === item.section){
-      return;
+    if (!item.nodes) {
+        if (this.selected === item.section){
+            return;
+        }
+        this.$state.go('.', { seccion: item.section });
+        this.selected = item.section;
     }
-    this.$state.go('.', { seccion: item.section });
-    this.selected = item.section;
   }
 }
 

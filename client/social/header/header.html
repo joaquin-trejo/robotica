@@ -1,5 +1,5 @@
 <header class="header">
-	<rd-navbar class="navbar" rd-compact="$ctrl.$state.includes('social.buscar')" ng-class="{'navbar__search' : $ctrl.$state.includes('social.buscar') }">
+	<rd-navbar class="navbar" rd-items="$ctrl.menuNavBar" rd-compact="$ctrl.$state.includes('social.buscar')" ng-class="{'navbar__search' : $ctrl.$state.includes('social.buscar') }">
 		<rd-navbar-brand>
 				<div class="navbar__logo">
 					<a ui-sref="social.home({seccion: null})">
@@ -34,27 +34,27 @@
 									<i class="fa" ng-class="item.icon"></i>
 									<span> {{item.caption}} </span>
 								</span>
-								<!--<span class="item-metadata">
-									<span class="item-metastat" ng-repeat="meta in item.metastats">
-										<small><i class="fa" ng-class="meta.icon"></i> <strong>{{meta.total}}</strong> {{meta.caption}}</small>
-									</span>
-								</span>-->
+
 							</md-item-template>
+						
 						</md-autocomplete>
+
+
 					</div>
 		</rd-navbar-navigation>
-		<rd-navbar-navigation ng-if="$ctrl.$state.includes('social.home')">
+		<rd-navbar-navigation>
 			<rd-navbar-item 
-				ng-repeat="item in $ctrl.navbarItems" 
-				ng-model="item" 
+				ng-repeat="item in $ctrl.menuNavBar"
+				ng-model="item"
+				menu-sections-name="$ctrl.arraySectionsName"
 				navbar-item-selected="item.section === $ctrl.selected"
 				ng-click="$ctrl.itemClicked(item)"
 				tabindex="0"/>
 		</rd-navbar-navigation>
 		<rd-navbar-tools>
-			<rd-navbar-item ui-sref="social.buscar" navbar-item-icon="ri ri-lupa" navbar-item-caption="Buscar" navbar-item-selected="$ctrl.$state.includes('social.buscar')"></rd-navbar-item>
+		<!--	<rd-navbar-item ui-sref="social.buscar" navbar-item-icon="ri ri-lupa" navbar-item-caption="Buscar" navbar-item-selected="$ctrl.$state.includes('social.buscar')"></rd-navbar-item>
 			<rd-navbar-item ui-sref="social.home" navbar-item-icon="mi mi-home" navbar-item-caption="Home" navbar-item-selected="$ctrl.$state.includes('social.home')"></rd-navbar-item>
-			<!--<rd-navbar-item navbar-item-icon="ri ri-mochila" navbar-item-caption="Mi Mochila"></rd-navbar-item>-->
+	-->
 		</rd-navbar-tools>
 		<rd-navbar-body>
 		</rd-navbar-body>

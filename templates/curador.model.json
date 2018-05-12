@@ -17,6 +17,10 @@
 		{
 			"name": "resource",
 			"url": "/tablero/resource/:uid"
+		},
+		{
+			"name": "users",
+			"url": "/tablero/users"
 		}
 	]
 }

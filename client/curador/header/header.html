@@ -47,11 +47,26 @@
 		</rd-navbar-navigation>
 		<rd-navbar-tools>
 			<!--<rd-navbar-item navbar-item-icon="ri ri-lupa" navbar-item-caption="Buscar"></rd-navbar-item>-->
-			<rd-navbar-item navbar-item-icon="mi mi-home" navbar-item-caption="Home" navbar-item-selected="true"></rd-navbar-item>
-			<rd-navbar-item navbar-item-icon="mi mi-person" navbar-item-caption="Profile" 
-											ng-hide="$ctrl.user.google.image.url !== undefined" ng-click="$ctrl.toggleProfile($event)"></rd-navbar-item>
-			<div class="rd-navbar__item profile__avatar" ng-show="$ctrl.user.google.image.url !== undefined"
+			<rd-navbar-item
+					navbar-item-icon="mi mi-home"
+					navbar-item-caption="Home"
+					navbar-item-selected="true">
+			</rd-navbar-item>
+			<rd-navbar-item
+					navbar-item-icon="mi mi-home"
+					navbar-item-caption="Usuarios"
+					navbar-item-selected="false"
+					ng-click="$ctrl.goUserModule()">
+			</rd-navbar-item>
+			<rd-navbar-item
+					navbar-item-icon="mi mi-person"
+					navbar-item-caption="Profile"
+					ng-hide="$ctrl.user.google.image.url !== undefined"
 					ng-click="$ctrl.toggleProfile($event)">
+			</rd-navbar-item>
+			<div class="rd-navbar__item profile__avatar"
+				 ng-show="$ctrl.user.google.image.url !== undefined"
+				 ng-click="$ctrl.toggleProfile($event)">
 					<img ng-src="{{$ctrl.user.google.image.url}}" alt="Avatar">
 			</div>
 		</rd-navbar-tools>

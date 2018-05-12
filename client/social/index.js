@@ -6,6 +6,7 @@ import angular from 'angular';
 import header from './header/header.component';
 import footer from './footer/footer.component';
 import resourceCard from './components/resourceCard/resourceCard.component';
+import userCard from './components/userCard/userCard.component';
 import resourceView from './components/resourceView/resourceView.component';
 import modalView from './components/modalView/modalView.component';
 import home from './home';
@@ -22,6 +23,7 @@ let requirements = [
 	header,
 	footer,
 	resourceCard,
+    userCard,
 	resourceView,
 	modalView,
 	home,

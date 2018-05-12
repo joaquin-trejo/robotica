@@ -23,6 +23,16 @@ export default class ResourceComponent extends CuradorComponent {
 		this.$mdDialog = $mdDialog;
 		this.ngMeta = ngMeta;
 
+		// Global captions to avoid unnecesary temporary captions inside functions
+		this.captions = {
+			'propuesta': 'Propuesta pedagógica',
+			'actividad': 'Actividad accesible',
+			'herramienta': 'Herramienta',
+			'orientacion': 'Orientación',
+			'mediateca': 'Mediateca',
+			'desafio': 'Desafío',
+		};
+
 		this.Resource = this.Restangular.one('resources', this.uid)
 		this.Publisheds = this.Restangular.all('resources');
 
@@ -55,15 +65,7 @@ export default class ResourceComponent extends CuradorComponent {
 	}
 
 	refreshUI(forceApply){
-		let captions = {
-			'propuesta': 'Propuesta pedagógica',
-			'actividad': 'Actividad',
-			'herramienta': 'Herramienta',
-			'orientacion': 'Orientación',
-			'mediateca': 'Mediateca',
-		};
-
-		this.headText = captions[this.resource.type];
+		this.headText = this.captions[this.resource.type];
 		this.showViculo = ['propuesta', 'actividad', 'orientacion' ].indexOf(this.resource.type) > -1;
 		this.getPublisheds(forceApply);
 	}
@@ -86,16 +88,8 @@ export default class ResourceComponent extends CuradorComponent {
 					return p._id !== this.uid;
 				});
 
-				let captions = {
-					'propuesta': 'Propuesta pedagógica',
-					'actividad': 'Actividad accesible',
-					'herramienta': 'Herramienta',
-					'orientacion': 'Orientación',
-					'mediateca': 'Mediateca',
-				};
-
 				this.publisheds = _.map(filtered, p =>{
-					p.typeCaption = captions[p.type];
+					p.typeCaption = this.captions[p.type];
 					return p;
 				});
 
@@ -283,16 +277,8 @@ export default class ResourceComponent extends CuradorComponent {
 				];
 			}
 
-			let captions = {
-				'propuesta': 'Propuesta pedagógica',
-				'actividad': 'Actividad accesible',
-				'herramienta': 'Herramienta',
-				'orientacion': 'Orientación',
-				'mediateca': 'Mediateca',
-			};
-
 			_.each(this.resource.links, l =>{
-				l.typeCaption = captions[l.type];
+				l.typeCaption = this.captions[l.type];
 			});
 
 			this.loading = false;
@@ -320,7 +306,9 @@ export default class ResourceComponent extends CuradorComponent {
 			});
 	}
 
-  canNext(step){
+  
+	
+	canNext(step){
     return true;
   }
 	
@@ -447,5 +435,10 @@ export default class ResourceComponent extends CuradorComponent {
 			.catch(err => {
 				throw err;
 			});
+	}
+
+
+	getResourceType(type){
+		return this.captions[type];
 	}
 }

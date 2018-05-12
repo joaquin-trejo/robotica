@@ -2,7 +2,6 @@ import gulp from 'gulp';
 import gulpLoadPlugins from 'gulp-load-plugins';
 import runSequence from 'run-sequence';
 import del from 'del';
-
 import tasksFactory from './tasks';
 
 let plugins = gulpLoadPlugins();
@@ -58,7 +57,7 @@ gulp.task('build', cb => {
 					'clean:dist', 
 					'inject'
 			],
-			'bump:build',
+		//	'bump:build',
 			'webpack:dist',
 			'server:dist',
 			'bump:inject',

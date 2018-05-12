@@ -86,7 +86,7 @@ export default class HomeComponent extends SocialComponent {
             'actividad': 'Actividad accesible',
             'herramienta': 'Herramienta',
             'orientacion': 'Orientación',
-            'mediateca': 'Mediateca',
+            'mediateca1': 'Mediateca1',
           };
           let total = data.$total;
           data = _.map(data, p =>{
@@ -151,6 +151,7 @@ export default class HomeComponent extends SocialComponent {
             'herramienta': 'Herramienta',
             'orientacion': 'Orientación',
             'mediateca': 'Mediateca',
+            'mediateca1': 'Mediateca1'
           };
 
           data.links = _.map(data.links, p =>{

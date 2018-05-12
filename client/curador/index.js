@@ -6,6 +6,7 @@ import header from './header/header.component';
 import dashboard from './dashboard';
 import newResource from './new';
 import resource from './resource';
+import users from './users';
 
 // config to providers
 import { curadorConfig } from './curador.config';
@@ -14,7 +15,8 @@ let requirements = [
 	header,
 	dashboard,
 	newResource,
-	resource
+	resource,
+    users
 ];
 
 module.exports = angular

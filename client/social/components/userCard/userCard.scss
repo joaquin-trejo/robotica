@@ -1,0 +1,14 @@
+.resource-card {
+  display: block;
+}
+
+.card {
+  padding: .5rem;
+  opacity: 0;
+  transition: transform .3s ease-in-out, opacity .2s ease-in-out  .4s;
+
+  &:hover .item-wrapper,
+  &:focus .item-wrapper {
+    box-shadow: $whiteframe-shadow-4dp;
+  }
+}

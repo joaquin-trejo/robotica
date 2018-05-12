@@ -1,2 +1,18 @@
-<span class="rd-navbar__item--icon" ng-class="$rdNavbarItemCtrl.icon" aria-hidden="true"></span>
-<span class="rd-navbar__item--caption rd__text--caption">{{$rdNavbarItemCtrl.caption}}</span>
+<!--<span class="rd-navbar__item&#45;&#45;icon" ng-class="$rdNavbarItemCtrl.icon" aria-hidden="true"></span>-->
+<span class="rd-navbar__item--caption rd__text--caption" ng-if="$rdNavbarItemCtrl.caption == 'Buscar' || $rdNavbarItemCtrl.caption == 'Home'">{{$rdNavbarItemCtrl.caption}}</span>
+
+<ul class="nav-items">
+    <li class="nav-item" id="item-{{$rdNavbarItemCtrl.model.section}}" ng-class="{'dropdown': $rdNavbarItemCtrl.model.nodes}">
+        <md-button class="nav-link" ng-click="$rdNavbarItemCtrl.itemClicked($rdNavbarItemCtrl.model)">{{ $rdNavbarItemCtrl.model.caption }} </md-button>
+        <!--<a class="nav-link">-->
+            <!--<span>{{ $rdNavbarItemCtrl.model.caption }} <i class="material-icons">keyboard_arrow_down</i></span>-->
+        <!--</a>-->
+        <nav class="submenu">
+            <ul class="submenu-items">
+                <li class="submenu-item" ng-repeat="node in $rdNavbarItemCtrl.model.nodes">
+                    <a href class="submenu-link" ng-click="$rdNavbarItemCtrl.itemClicked(node)">{{ node.caption }}</a>
+                </li>
+            </ul>
+        </nav>
+    </li>
+</ul>

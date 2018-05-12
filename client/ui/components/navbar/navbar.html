@@ -10,9 +10,9 @@
 	<!-- BRAND-->
 	<a href="#" class="rd-navbar__brand" aria-label="Ir al home" ng-transclude="brand">
 	</a>
-	
+
 	<!-- HORIZONTAL NAVIGATION -->
-	<nav class="rd-navbar__nav--navigation" ng-transclude="items" role="navigation">
+	<nav class="nav rd-navbar__nav--navigation" ng-transclude="items" role="navigation">
 	</nav>
 
 	<!-- TOOLS -->
@@ -21,9 +21,36 @@
 	<!-- PROFILE -->
 	<div class="rd-navbar__profile" ng-transclude="profile"></div>
 </div>
+
 <!-- VERTICAL NAVIGATION -->
-<div flex class="rd-navbar__dropdown" md-whiteframe="4" ng-show="$rdNavbarController.dropdownOpened">
+<div flex class="rd-navbar__dropdown" md-whiteframe="15" ng-show="false">
 	<div class="rd-navbar__dropdown--background"></div>
-	<div class="rd-navbar__dropdown--items" ng-transclude="items"></div>
+	<div class="rd-navbar__dropdown--items" ng-transclude="items">
+	</div>
+	<div class="rd-navbar__dropdown--tools" ng-transclude="tools"></div>
+</div>
+
+<!-- CUSTOM VERTICAL NAVIGATION -->
+<div flex class="rd-navbar__dropdown" md-whiteframe="15" ng-show="$rdNavbarController.dropdownOpened">
+	<div class="rd-navbar__dropdown--background"></div>
+	<div class="rd-navbar__dropdown--items">
+		<nav class="navigation">
+			<ul class="mainmenu">
+				<li ng-repeat="item in $rdNavbarController.navBarItems track by $index" ng-init="$rdNavbarController.showSubmenu[$index] = false">
+					<a href 
+						ng-click="$rdNavbarController.showSubmenu[$index] = !$rdNavbarController.showSubmenu[$index]; $rdNavbarController.itemClicked(item)">
+						{{ item.caption }}
+						<i class="fa fal fa-angle-down" ng-if="item.nodes && $rdNavbarController.showSubmenu[$index] == true"></i>
+						<i class="fa fal fa-angle-right" ng-if="item.nodes && $rdNavbarController.showSubmenu[$index] == false"></i>
+					</a>
+					<ul class="submenu-i" ng-show="$rdNavbarController.showSubmenu[$index]">
+						<li ng-repeat="subItem in item.nodes">
+							<a href ng-click="$rdNavbarController.itemClicked(subItem)">{{ subItem.caption }}</a>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</nav>
+	</div>
 	<div class="rd-navbar__dropdown--tools" ng-transclude="tools"></div>
 </div>

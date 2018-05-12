@@ -33,6 +33,7 @@ class CuradorHeaderComponent {
     });
   }
 
+
   searchTextChange(searchText){
     this.$rootScope.$emit('filterChange', searchText);
   }
@@ -81,6 +82,13 @@ class CuradorHeaderComponent {
     this.Auth.logout();
     this.$state.go('app.login');
   }
+
+    goUserModule() {
+        // let host = window.location.host;
+        // let protocol = window.location.protocol;
+        // window.location.href = `${protocol}//${host}/tablero/users`;
+        this.$state.go('curador.users');
+    }
 }
 
 export default angular.module('robotica.curador.curadorHeader', [])

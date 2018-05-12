@@ -1,9 +1,0 @@
-@each $key, $section in $sections {
-	.rd-stepper[data-rd-section="#{$key}"],
-	.rd-stepper[rd-section="#{$key}"] {
-		.rd-stepper__step[step-status="editing"] > .rd-stepper__step--number {
-			border-color: map-get($section, color);
-			background-color: map-get($section, color);
-		}
-	}
-}
